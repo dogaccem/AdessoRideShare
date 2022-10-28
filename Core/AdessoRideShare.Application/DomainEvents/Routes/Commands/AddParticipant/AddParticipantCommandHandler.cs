@@ -19,7 +19,7 @@ namespace AdessoRideShare.Application.DomainEvents.Routes.Commands.AddParticipan
         public async Task<Unit> Handle(AddParticipantCommand request, CancellationToken cancellationToken)
         {
             var entity = await _routeRepository.GetRouteAsync(request.RouteId);
-            if(entity.Participants.Count()< entity.SeatingCapacity)
+            if(entity.Participants.Count() < entity.SeatingCapacity)
             {
                 await _routeRepository.InsertParticipantAsync(new Participant(request.FirstName,request.LastName,request.RouteId));
             }

@@ -21,7 +21,7 @@ namespace AdessoRideShare.Infrastructure.Repositories
 
         public async Task<Route> GetRouteAsync(int id)
         {
-            var entity = await _dbContext.Routes.FirstOrDefaultAsync(r => r.Id == id);
+            var entity = await _dbContext.Routes.Include(r => r.Participants).FirstOrDefaultAsync(r => r.Id == id);
             if (entity is null)
                 throw new ArgumentNullException("Entity cannot be empty");
             return entity;
